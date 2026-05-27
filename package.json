@@ -1,0 +1,10 @@
+{
+  "name": "camstar-defence",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve cloned -l $PORT"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}

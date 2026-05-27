@@ -1,0 +1,3 @@
+[deploy]
+startCommand = "npx serve cloned -l $PORT"
+healthcheckPath = "/"

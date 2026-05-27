@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "builds": [
+    {
+      "src": "cloned/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/cloned/index.html" },
+    { "src": "/(.*)", "dest": "/cloned/$1" }
+  ]
+}

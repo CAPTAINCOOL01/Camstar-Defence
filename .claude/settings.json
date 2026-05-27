@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sL https://github.com/cli/cli/releases/download/v2.65.0/gh_2.65.0_windows_amd64.msi -o /tmp/gh.msi)",
+      "Read(//tmp/**)",
+      "Bash(git config *)"
+    ]
+  }
+}
