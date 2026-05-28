@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Camstar Defence &ndash; Precision Firearms &middot; EST. 1997</title>
-<meta name="description" content="India's precision firearms manufacturer &mdash; engineering sidearms for marksmen, sport shooters and licensed professionals since 1997."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<style>
+"""
+Build the 4 standalone pages (index/products/about/contact) using a single
+shared shell (CSS + util-bar + nav + footer + JS). Each page injects its own
+body content. Active nav state is highlighted via a per-page id on <body>.
+"""
+
+import os
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# --------------------------------------------------------------------------
+# SHARED CSS (extended from original design system + extras for new pages)
+# --------------------------------------------------------------------------
+SHARED_CSS = r"""
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 body{
@@ -484,11 +487,32 @@ address{font-style:normal;}
 .ct-card h4{font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-0);margin-bottom:0.5rem;}
 .ct-card p{font-size:0.85rem;color:var(--ink-2);line-height:1.6;}
 @media(max-width:680px){.contact-tri{grid-template-columns:1fr;}}
-</style>
+"""
 
-</head>
-<body data-page="home">
+# --------------------------------------------------------------------------
+# Shared SVG icons
+# --------------------------------------------------------------------------
+ICON_ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>'
 
+# --------------------------------------------------------------------------
+# Nav + footer (active class injected per-page)
+# --------------------------------------------------------------------------
+def build_nav(active):
+    items = [
+        ("Home", "index.html", "home"),
+        ("About", "about.html", "about"),
+        ("Arsenal", "products.html", "products"),
+        ("Contact", "contact.html", "contact"),
+    ]
+    desktop = "".join(
+        f'<a href="{href}"{" class=\"active\"" if key == active else ""}>{label}</a>'
+        for label, href, key in items
+    )
+    mobile = "".join(
+        f'<a href="{href}"{" class=\"active\"" if key == active else ""}>{label}</a>'
+        for label, href, key in items
+    )
+    return f"""
 <div class="util-bar">
   Licensed Firearms Manufacturer &middot; Made in India &middot; +91 9793 849 997 &middot; info@camstardefence.com
 </div>
@@ -501,7 +525,7 @@ address{font-style:normal;}
         <span class="sub">Defence &middot; EST. 1997</span>
       </div>
     </a>
-    <div class="nav-links"><a href="index.html" class="active">Home</a><a href="about.html">About</a><a href="products.html">Arsenal</a><a href="contact.html">Contact</a></div>
+    <div class="nav-links">{desktop}</div>
     <div class="nav-right">
       <a href="contact.html" class="nav-cta">Enquire Now</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -510,150 +534,14 @@ address{font-style:normal;}
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" class="active">Home</a><a href="about.html">About</a><a href="products.html">Arsenal</a><a href="contact.html">Contact</a>
+    {mobile}
     <a href="contact.html">Enquire Now</a>
   </div>
 </nav>
+"""
 
 
-<section class="hero block" id="hero">
-  <div class="hero-left" style="padding-inline:clamp(1.25rem,5vw,2.5rem)">
-    <span class="eyebrow hero-eyebrow">India's Premier Firearms Manufacturer &middot; Since 1997</span>
-    <h1 class="h-display hero-headline">
-      Precision.<br/>
-      <span class="strike">Engineered.</span><br/>
-      <span class="accent">Proven.</span>
-    </h1>
-    <p class="hero-sub">Camstar Defence has been manufacturing precision firearms for licensed professionals, sport shooters and marksmen across India for over 25 years. Every sidearm built to uncompromising standards.</p>
-    <div class="hero-ctas">
-      <a href="products.html" class="btn-primary">
-        <span>Explore Arsenal</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-      <a href="contact.html" class="btn-ghost">Request Demo</a>
-    </div>
-  </div>
-  <div class="hero-right" style="padding-inline:clamp(1.25rem,5vw,2.5rem)">
-    <div class="hero-art">
-      <div class="corners"></div>
-      <div class="corners-inner"></div>
-      <div class="silhouette">
-        <img src="wp-content/uploads/2025/08/M45-Ace-Lite-101-Right-WEBP-1.webp" alt="Star M45 ACE Lite" style="width:90%;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(209,30,58,0.35));"/>
-      </div>
-      <div class="tag">
-        <strong>M45 ACE LITE</strong>
-        Flagship &middot; .45 ACP
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="stats">
-  <div class="wrap">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="25">0</span><sup>+</sup></div>
-        <div class="stat-label">Years of Manufacture</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="13">0</span></div>
-        <div class="stat-label">Active Models</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="100">0</span><sup>%</sup></div>
-        <div class="stat-label">Made In India</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span data-count="50000">0</span><sup>+</sup></div>
-        <div class="stat-label">Firearms Built</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="block" id="about-teaser">
-  <div class="wrap">
-    <div class="section-head reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:center;margin-bottom:0;">
-      <div>
-        <div class="section-num"><span>01</span> / Who We Are</div>
-        <h2 class="h-display">Built in India.<br/>Built to last.</h2>
-      </div>
-      <div>
-        <p style="color:var(--ink-1);line-height:1.8;margin-bottom:1.5rem;">Founded in Kanpur in 1997, Camstar Defence has grown from a regional manufacturer into one of the most respected names in Indian precision firearms. Twenty-five years of steel-on-steel engineering, hand-fitted lockup, and finishes that outlive their owners.</p>
-        <a href="about.html" class="btn-ghost">Read Our Story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="products-section pillars-bg" id="featured">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="meta">
-        <div class="section-num"><span>02</span> / Featured</div>
-        <h2 class="h-display">The standout four.</h2>
-      </div>
-      <p class="lede">A glimpse of the lineup &mdash; flagship competition, defence grade, classic 1911 and Tokarev.</p>
-    </div>
-    <div class="product-grid reveal">
-      
-<a class="product feature" data-cat="pistols 1911 defence" href="star-m45-ace-lite/index.html">
-  <div class="product-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
-  <div class="product-sku">SKU: M45-ACE</div>
-  <div class="product-name">Star M45<br/>ACE Lite</div>
-  <div class="pad"><img src="wp-content/uploads/2025/08/M45-Ace-Lite-101-Right-WEBP-1.webp" alt="Star M45 ACE Lite" class="product-photo" loading="lazy"/></div>
-  <div class="product-desc">Our flagship competition pistol in .45 ACP. Lightweight alloy frame, match-grade barrel, adjustable rear sight. Designed for IPSC and ISSF sport shooting at the highest level.</div>
-  <div class="product-tags"><span class="tag red">Flagship</span><span class="tag">.45 ACP</span><span class="tag">Competition</span><span class="tag">Alloy Frame</span></div>
-</a>
-
-<a class="product feature" data-cat="pistols defence" href="baaz-30/index.html">
-  <div class="product-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
-  <div class="product-sku">SKU: BAAZ-30</div>
-  <div class="product-name">BAAZ 30</div>
-  <div class="pad"><img src="wp-content/uploads/2026/05/BAAZ-30-scaled.png" alt="BAAZ 30" class="product-photo" loading="lazy"/></div>
-  <div class="product-desc">Our most requested defence-grade model. Three independent safeties, steel-on-steel lockup, corrosion-resistant finish. Built for licensed professionals who cannot afford failure.</div>
-  <div class="product-tags"><span class="tag red">Defence Grade</span><span class="tag">.30 Bore</span><span class="tag">3x Safety</span><span class="tag">Pro</span></div>
-</a>
-
-<a class="product" data-cat="pistols 1911" href="star-king-1911/index.html">
-  <div class="product-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
-  <div class="product-sku">SKU: K1911</div>
-  <div class="product-name">Star King<br/>1911</div>
-  <div class="pad"><img src="wp-content/uploads/2026/05/Star-King-1911-Right.png" alt="Star King 1911" class="product-photo" loading="lazy"/></div>
-  <div class="product-desc">A premium 1911-platform pistol in .45 ACP. Hand-fitted barrel bushing, beavertail safety, match trigger. A collector's piece that shoots like a competition gun.</div>
-  <div class="product-tags"><span class="tag">.45 ACP</span><span class="tag">1911 Platform</span><span class="tag">Premium</span></div>
-</a>
-
-<a class="product" data-cat="pistols" href="star-tt30/index.html">
-  <div class="product-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
-  <div class="product-sku">SKU: TT-30</div>
-  <div class="product-name">Star TT 30</div>
-  <div class="pad"><img src="wp-content/uploads/2026/05/Star-TT30-Special-Right.png" alt="Star TT 30" class="product-photo" loading="lazy"/></div>
-  <div class="product-desc">Classic Tokarev-pattern pistol in .30 bore. Proven action, all-steel construction, beloved by licensed carry owners across India.</div>
-  <div class="product-tags"><span class="tag">.30 Bore</span><span class="tag">Classic</span><span class="tag">All-Steel</span></div>
-</a>
-
-    </div>
-    <div style="text-align:center;margin-top:3rem;">
-      <a href="products.html" class="btn-primary">
-        <span>View Full Arsenal</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="cta" id="contact-cta">
-  <div class="wrap">
-    <span class="eyebrow center">03 / Stay Informed</span>
-    <h2 class="h-display">Built for marksmen.<br/>Delivered to professionals.</h2>
-    <p>Join the Camstar list for new model launches, training intake dates and dealer announcements. One email per month. No spam.</p>
-    <form class="cta-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed';">
-      <input type="email" placeholder="Your email address" required/>
-      <button type="submit">Send &rarr;</button>
-    </form>
-  </div>
-</section>
-
-
+FOOTER = """
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -708,8 +596,12 @@ address{font-style:normal;}
     </div>
   </div>
 </footer>
+"""
 
-<script>
+# --------------------------------------------------------------------------
+# Shared JS
+# --------------------------------------------------------------------------
+JS = r"""
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 if (navToggle) {
@@ -823,6 +715,714 @@ if (cf) {
     }, 700);
   });
 }
-</script>
+"""
+
+# --------------------------------------------------------------------------
+# Page shell
+# --------------------------------------------------------------------------
+def shell(title, description, active, body, extra_head=""):
+    nav = build_nav(active)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{title}</title>
+<meta name="description" content="{description}"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>{SHARED_CSS}</style>
+{extra_head}
+</head>
+<body data-page="{active}">
+{nav}
+{body}
+{FOOTER}
+<script>{JS}</script>
 </body>
 </html>
+"""
+
+# --------------------------------------------------------------------------
+# 13 products (used by index featured + products page)
+# Each: slug folder, sku, name (HTML allowed), image path, desc, category tags
+# --------------------------------------------------------------------------
+PRODUCTS = [
+    dict(slug="star-m45-ace-lite", sku="M45-ACE", name="Star M45<br/>ACE Lite",
+         img="wp-content/uploads/2025/08/M45-Ace-Lite-101-Right-WEBP-1.webp",
+         desc="Our flagship competition pistol in .45 ACP. Lightweight alloy frame, match-grade barrel, adjustable rear sight. Designed for IPSC and ISSF sport shooting at the highest level.",
+         tags=[("Flagship","red"),(".45 ACP",""),("Competition",""),("Alloy Frame","")],
+         cats="pistols 1911 defence"),
+    dict(slug="star-tt30", sku="TT-30", name="Star TT 30",
+         img="wp-content/uploads/2026/05/Star-TT30-Special-Right.png",
+         desc="Classic Tokarev-pattern pistol in .30 bore. Proven action, all-steel construction, beloved by licensed carry owners across India.",
+         tags=[(".30 Bore",""),("Classic",""),("All-Steel","")],
+         cats="pistols"),
+    dict(slug="star-m32", sku="M32", name="Star M32",
+         img="wp-content/uploads/2025/08/Star-M32-Right.webp",
+         desc="Modern 9mm pistol with polymer-grip steel frame. Ergonomic design, improved sights and a refined trigger for sport shooters demanding consistency.",
+         tags=[("9mm",""),("Sport",""),("Modern","")],
+         cats="pistols"),
+    dict(slug="star-m30", sku="M30", name="Star M30",
+         img="wp-content/uploads/2025/08/Star-M30-Classic-Right-Black.webp",
+         desc="A refined .30 bore pistol combining modern ergonomics with the reliability of the Tokarev platform. Ideal for new licensed owners.",
+         tags=[(".30 Bore",""),("Ergonomic",""),("Reliable","")],
+         cats="pistols"),
+    dict(slug="star-super-30", sku="S30", name="Super 30",
+         img="wp-content/uploads/2025/08/Super-30-Right-scaled.webp",
+         desc="Enhanced .30 bore platform with improved barrel crown, extended grip and target-spec sights. Camstar's sharpshooter's choice for .30 bore.",
+         tags=[(".30 Bore",""),("Enhanced",""),("Target","")],
+         cats="pistols"),
+    dict(slug="star-x32", sku="X32", name="Star X32",
+         img="wp-content/uploads/2025/08/Star-X32-Right-1.webp",
+         desc="Competition-oriented 9mm with extended magazine capacity and ambidextrous safety. Designed for stage shooting and high-volume practice.",
+         tags=[("9mm",""),("Extended Mag",""),("Ambidextrous","")],
+         cats="pistols"),
+    dict(slug="star-bolt-30", sku="B30", name="Bolt 30",
+         img="wp-content/uploads/2025/08/Star-Bolt-30-Right-1.webp",
+         desc="Compact .30 bore with shortened slide and grip. Purpose-built for concealed licensed carry while retaining the legendary Camstar reliability.",
+         tags=[(".30 Bore",""),("Compact",""),("Carry","")],
+         cats="pistols compact"),
+    dict(slug="star-max-32", sku="MX32", name="Max 32",
+         img="wp-content/uploads/2025/08/Star-Max-32-Right-1.webp",
+         desc="Full-size 9mm with maximum-capacity magazine and full-length rail. Camstar's most feature-rich 9mm for sport and defence applications.",
+         tags=[("9mm",""),("Full-Size",""),("Rail Equipped","")],
+         cats="pistols defence"),
+    dict(slug="star-king-1911", sku="K1911", name="Star King<br/>1911",
+         img="wp-content/uploads/2026/05/Star-King-1911-Right.png",
+         desc="A premium 1911-platform pistol in .45 ACP. Hand-fitted barrel bushing, beavertail safety, match trigger. A collector's piece that shoots like a competition gun.",
+         tags=[(".45 ACP",""),("1911 Platform",""),("Premium","")],
+         cats="pistols 1911"),
+    dict(slug="baaz-30", sku="BAAZ-30", name="BAAZ 30",
+         img="wp-content/uploads/2026/05/BAAZ-30-scaled.png",
+         desc="Our most requested defence-grade model. Three independent safeties, steel-on-steel lockup, corrosion-resistant finish. Built for licensed professionals who cannot afford failure.",
+         tags=[("Defence Grade","red"),(".30 Bore",""),("3x Safety",""),("Pro","")],
+         cats="pistols defence"),
+    dict(slug="star-fx-100", sku="FX-100", name="FX-100",
+         img="wp-content/uploads/2026/05/FX-100-Right.png",
+         desc="Camstar's next-generation platform. Modular grip system, optic-ready slide, extended Picatinny rail. The future of Indian sport shooting sidearms.",
+         tags=[("New","red"),("9mm",""),("Optic Ready",""),("Modular","")],
+         cats="pistols"),
+    dict(slug="star-30-original", sku="30-OG", name="Star 30<br/>Original",
+         img="wp-content/uploads/2026/05/Star-30-Original-Right-1.png",
+         desc="The firearm that started it all. Camstar's original .30 bore pistol &mdash; a testament to the design principles that have guided every model since 1997.",
+         tags=[(".30 Bore",""),("Classic",""),("Heritage","")],
+         cats="pistols"),
+    dict(slug="star-ss-1911", sku="SS-1911", name="Star SS<br/>1911",
+         img="wp-content/uploads/2026/05/Star-SS-1911-Right.png",
+         desc="The stainless variant of our acclaimed 1911 platform. Mirror-polished stainless steel construction with all the match-grade internals of the King 1911.",
+         tags=[("1911 Platform",""),("Stainless",""),(".45 ACP","")],
+         cats="pistols 1911"),
+]
+
+
+def product_card(p, feature=False):
+    tag_html = "".join(
+        f'<span class="tag{" "+cls if cls else ""}">{label}</span>'
+        for label, cls in p["tags"]
+    )
+    cls = "product feature" if feature else "product"
+    arrow = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>'
+    return f"""
+<a class="{cls}" data-cat="{p['cats']}" href="{p['slug']}/index.html">
+  <div class="product-arrow">{arrow}</div>
+  <div class="product-sku">SKU: {p['sku']}</div>
+  <div class="product-name">{p['name']}</div>
+  <div class="pad"><img src="{p['img']}" alt="{p['name'].replace('<br/>',' ')}" class="product-photo" loading="lazy"/></div>
+  <div class="product-desc">{p['desc']}</div>
+  <div class="product-tags">{tag_html}</div>
+</a>
+"""
+
+
+# ==========================================================================
+# PAGE 1 — INDEX (landing)
+# ==========================================================================
+def page_index():
+    # Featured 4 (M45 ACE Lite + BAAZ 30 are features, plus King 1911 + TT30)
+    featured_slugs = ["star-m45-ace-lite", "baaz-30", "star-king-1911", "star-tt30"]
+    p_map = {p["slug"]: p for p in PRODUCTS}
+    feature_keys = {"star-m45-ace-lite", "baaz-30"}
+    cards = "".join(
+        product_card(p_map[s], feature=(s in feature_keys))
+        for s in featured_slugs
+    )
+
+    body = f"""
+<section class="hero block" id="hero">
+  <div class="hero-left" style="padding-inline:clamp(1.25rem,5vw,2.5rem)">
+    <span class="eyebrow hero-eyebrow">India's Premier Firearms Manufacturer &middot; Since 1997</span>
+    <h1 class="h-display hero-headline">
+      Precision.<br/>
+      <span class="strike">Engineered.</span><br/>
+      <span class="accent">Proven.</span>
+    </h1>
+    <p class="hero-sub">Camstar Defence has been manufacturing precision firearms for licensed professionals, sport shooters and marksmen across India for over 25 years. Every sidearm built to uncompromising standards.</p>
+    <div class="hero-ctas">
+      <a href="products.html" class="btn-primary">
+        <span>Explore Arsenal</span>{ICON_ARROW}
+      </a>
+      <a href="contact.html" class="btn-ghost">Request Demo</a>
+    </div>
+  </div>
+  <div class="hero-right" style="padding-inline:clamp(1.25rem,5vw,2.5rem)">
+    <div class="hero-art">
+      <div class="corners"></div>
+      <div class="corners-inner"></div>
+      <div class="silhouette">
+        <img src="wp-content/uploads/2025/08/M45-Ace-Lite-101-Right-WEBP-1.webp" alt="Star M45 ACE Lite" style="width:90%;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(209,30,58,0.35));"/>
+      </div>
+      <div class="tag">
+        <strong>M45 ACE LITE</strong>
+        Flagship &middot; .45 ACP
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num"><span data-count="25">0</span><sup>+</sup></div>
+        <div class="stat-label">Years of Manufacture</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span data-count="13">0</span></div>
+        <div class="stat-label">Active Models</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span data-count="100">0</span><sup>%</sup></div>
+        <div class="stat-label">Made In India</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span data-count="50000">0</span><sup>+</sup></div>
+        <div class="stat-label">Firearms Built</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="block" id="about-teaser">
+  <div class="wrap">
+    <div class="section-head reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:center;margin-bottom:0;">
+      <div>
+        <div class="section-num"><span>01</span> / Who We Are</div>
+        <h2 class="h-display">Built in India.<br/>Built to last.</h2>
+      </div>
+      <div>
+        <p style="color:var(--ink-1);line-height:1.8;margin-bottom:1.5rem;">Founded in Kanpur in 1997, Camstar Defence has grown from a regional manufacturer into one of the most respected names in Indian precision firearms. Twenty-five years of steel-on-steel engineering, hand-fitted lockup, and finishes that outlive their owners.</p>
+        <a href="about.html" class="btn-ghost">Read Our Story {ICON_ARROW}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products-section pillars-bg" id="featured">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>02</span> / Featured</div>
+        <h2 class="h-display">The standout four.</h2>
+      </div>
+      <p class="lede">A glimpse of the lineup &mdash; flagship competition, defence grade, classic 1911 and Tokarev.</p>
+    </div>
+    <div class="product-grid reveal">
+      {cards}
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <a href="products.html" class="btn-primary">
+        <span>View Full Arsenal</span>{ICON_ARROW}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact-cta">
+  <div class="wrap">
+    <span class="eyebrow center">03 / Stay Informed</span>
+    <h2 class="h-display">Built for marksmen.<br/>Delivered to professionals.</h2>
+    <p>Join the Camstar list for new model launches, training intake dates and dealer announcements. One email per month. No spam.</p>
+    <form class="cta-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed';">
+      <input type="email" placeholder="Your email address" required/>
+      <button type="submit">Send &rarr;</button>
+    </form>
+  </div>
+</section>
+"""
+    return shell(
+        title="Camstar Defence &ndash; Precision Firearms &middot; EST. 1997",
+        description="India's precision firearms manufacturer &mdash; engineering sidearms for marksmen, sport shooters and licensed professionals since 1997.",
+        active="home",
+        body=body,
+    )
+
+
+# ==========================================================================
+# PAGE 2 — PRODUCTS (arsenal)
+# ==========================================================================
+def page_products():
+    feature_keys = {"star-m45-ace-lite", "baaz-30"}
+    cards = "".join(
+        product_card(p, feature=(p["slug"] in feature_keys))
+        for p in PRODUCTS
+    )
+
+    body = f"""
+<section class="page-hero">
+  <div class="wrap" style="position:relative;z-index:1;">
+    <div class="crumbs"><a href="index.html">Home</a> <span>/</span> Arsenal</div>
+    <h1 class="h-display">The Arsenal.</h1>
+    <p>Thirteen platforms. From classic Tokarev .30 bore to next-generation modular 9mm and match-grade 1911. Every sidearm individually tested before dispatch.</p>
+    <span class="count">13 Models &middot; All Made in India</span>
+    <div class="chips">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="pistols">Pistols</button>
+      <button class="chip" data-filter="1911">1911 Platform</button>
+      <button class="chip" data-filter="compact">Compact / Carry</button>
+      <button class="chip" data-filter="defence">Defence Grade</button>
+    </div>
+  </div>
+</section>
+
+<section class="products-section">
+  <div class="wrap">
+    <div class="product-grid reveal">
+      {cards}
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <span class="eyebrow center">Need help choosing?</span>
+    <h2 class="h-display">Talk to our team.</h2>
+    <p>From licensing guidance to dealer locator and custom orders &mdash; we respond within one business day.</p>
+    <a href="contact.html" class="btn-primary">
+      <span>Contact Camstar</span>{ICON_ARROW}
+    </a>
+  </div>
+</section>
+"""
+    return shell(
+        title="The Arsenal &ndash; All 13 Models &middot; Camstar Defence",
+        description="Browse the full Camstar Defence arsenal &mdash; 13 precision firearms including the M45 ACE Lite, BAAZ 30, Star TT 30, King 1911 and FX-100.",
+        active="products",
+        body=body,
+    )
+
+
+# ==========================================================================
+# PAGE 3 — ABOUT
+# ==========================================================================
+def page_about():
+    body = f"""
+<section class="page-hero">
+  <div class="wrap" style="position:relative;z-index:1;">
+    <div class="crumbs"><a href="index.html">Home</a> <span>/</span> About</div>
+    <h1 class="h-display">Engineered for those who don't miss.</h1>
+    <p>Twenty-five years. Thirteen models. One standard. The story of an Indian firearms house built around steel-on-steel precision and zero-compromise lockup.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="about-rich reveal">
+      <div class="copy">
+        <span class="year-badge">EST. 1997 &middot; Kanpur</span>
+        <p>Founded in Kanpur &mdash; India's historic arms manufacturing hub &mdash; Camstar Defence Industries grew from a single workshop into one of the most respected names in Indian precision firearms. Twenty-five years on, the discipline that started it all has not changed: machine to tolerance, hand-fit the lockup, prove every sidearm before it ships.</p>
+        <p>We serve licensed individual owners, sport shooting associations, private security operators and government-approved dealers across the country. Our factory operates under the strictest compliance frameworks. Every firearm is individually serial-stamped, proof-tested and dispatched only after passing a 200-round bench cycle.</p>
+
+        <div class="pull-quote">
+          &ldquo;A pistol either locks up zero-play or it does not. There is no halfway.&rdquo;
+          <span class="src">&mdash; Founder's first workshop note, 1997</span>
+        </div>
+
+        <p>From the classic .30 bore Tokarev platform that built our reputation, to the modern .45 ACP M45 ACE Lite and the defence-grade BAAZ 30, every Camstar sidearm carries the same lineage: forged steel slides, precision-machined frames and a finish engineered to endure thousands of rounds in India's demanding climate.</p>
+        <p>The Camstar Training Facility, opened in 2018 on the outskirts of Kanpur, hosts certified marksmanship programmes year-round &mdash; from licensed-carry orientation through ISSF and IPSC competition coaching.</p>
+
+        <div style="margin-top:2rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="products.html" class="btn-primary"><span>See the Arsenal</span>{ICON_ARROW}</a>
+          <a href="contact.html" class="btn-ghost">Visit the Workshop</a>
+        </div>
+      </div>
+      <div class="about-side-visual">
+        <img src="wp-content/uploads/2025/08/Star-M32-Landspace_1_11zon.jpg" alt="Camstar workshop"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block pillars-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>02</span> / Pillars</div>
+        <h2 class="h-display">Four disciplines.<br/>One standard.</h2>
+      </div>
+      <p class="lede">What every Camstar firearm stands on &mdash; engineering, gear, competition pedigree, and training.</p>
+    </div>
+    <div class="pillars-grid reveal">
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+            <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div>
+        <h3>Engineering</h3>
+        <p>CNC-machined components held to tolerances of plus-minus 0.01mm. Steel-on-steel lockup for zero-play action every cycle.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3>Gear</h3>
+        <p>Holsters, magazines, recoil systems and optic mounts engineered alongside our pistols &mdash; not added afterwards.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polygon points="12 2 15 8 22 9 17 14 18 22 12 18 6 22 7 14 2 9 9 8 12 2"/>
+          </svg>
+        </div>
+        <h3>Competitions</h3>
+        <p>Camstar sidearms are competing on national-level IPSC and ISSF stages. Each platform proven by national champions before mass dispatch.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M2 12l10-9 10 9"/><path d="M5 10v10h14V10"/>
+          </svg>
+        </div>
+        <h3>Training</h3>
+        <p>Our Kanpur training facility runs licensed-carry, competition and instructor-certification programmes year-round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="spotlight" id="spotlight">
+  <div class="wrap spotlight-inner">
+    <div>
+      <span class="eyebrow">Section 03 / Featured Build</span>
+      <h2 class="h-display">BAAZ 30.<br/>Defence grade.<br/>Field tested.</h2>
+      <p>The BAAZ 30 is our most requested model &mdash; a defence-grade .30 bore pistol engineered for reliability in the hands of licensed professionals. Three independent safeties. Steel-on-steel lockup. Proven in the field.</p>
+      <div class="specs">
+        <div class="spec"><div class="k">Calibre</div><div class="v">.30 Bore</div></div>
+        <div class="spec"><div class="k">Capacity</div><div class="v">8+1</div></div>
+        <div class="spec"><div class="k">Safeties</div><div class="v">3x</div></div>
+      </div>
+      <a href="baaz-30/index.html" class="btn-primary">
+        <span>See the BAAZ 30</span>{ICON_ARROW}
+      </a>
+    </div>
+    <div class="spotlight-visual">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="crosshair"></div>
+      <div class="crosshair v"></div>
+      <div class="target"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="heritage">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>04</span> / Heritage</div>
+        <h2 class="h-display">Four moments<br/>in Camstar history.</h2>
+      </div>
+      <p class="lede">From a single workshop in Kanpur to a 13-model arsenal and a national training facility.</p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year">1997</div>
+          <div class="tl-title">Camstar Founded</div>
+          <div class="tl-desc">First workshop opens in Kanpur. The Star 30 Original &mdash; a classic .30 bore Tokarev platform &mdash; rolls off the bench.</div>
+        </div>
+        <div class="tl-dot"></div>
+        <div></div>
+      </div>
+      <div class="tl-item">
+        <div></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">2010</div>
+          <div class="tl-title">First Export Order</div>
+          <div class="tl-desc">Camstar wins its first international dealer contract, shipping Star M30 Classic models to verified buyers under Indian export licensing.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year">2018</div>
+          <div class="tl-title">Training Facility Opens</div>
+          <div class="tl-desc">The Camstar Training Facility &mdash; a 25-bay outdoor range and indoor academy &mdash; opens on the outskirts of Kanpur for certified marksmanship programmes.</div>
+        </div>
+        <div class="tl-dot"></div>
+        <div></div>
+      </div>
+      <div class="tl-item">
+        <div></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">2025</div>
+          <div class="tl-title">BAAZ 30 Launch</div>
+          <div class="tl-desc">After five years of development, the defence-grade BAAZ 30 platform ships to the first cohort of licensed professional customers.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block pillars-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>05</span> / The Workshop</div>
+        <h2 class="h-display">Inside Kanpur.</h2>
+      </div>
+      <p class="lede">A look at where every Camstar sidearm is machined, finished and proof-tested.</p>
+    </div>
+    <div class="workshop-grid reveal">
+      <div class="ws"><img src="wp-content/uploads/2025/08/Star-M32-Landspace_1_11zon.jpg" alt="Workshop"/><div class="lbl">Bench Test</div></div>
+      <div class="ws"><img src="wp-content/uploads/2025/08/9.jpg" alt="Range work"/><div class="lbl">Proof Range</div></div>
+      <div class="ws"><img src="wp-content/uploads/2025/08/Aesthetic-Max-32-02.webp" alt="Max 32 detail"/><div class="lbl">Finish Pass</div></div>
+      <div class="ws"><img src="wp-content/uploads/2025/08/Star-M45-ACE-Lite-101_3_11zon.jpg" alt="M45 ACE Lite detail"/><div class="lbl">Match Build</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <span class="eyebrow center">Want to visit?</span>
+    <h2 class="h-display">See the workshop.<br/>Try the range.</h2>
+    <p>Range visits and factory tours are available by appointment for licensed dealers, training partners and approved press.</p>
+    <a href="contact.html" class="btn-primary">
+      <span>Request a Visit</span>{ICON_ARROW}
+    </a>
+  </div>
+</section>
+"""
+    return shell(
+        title="About Camstar Defence &ndash; 25 Years of Indian Precision",
+        description="The Camstar Defence story &mdash; 25 years, 13 models, one standard. Founded in Kanpur in 1997.",
+        active="about",
+        body=body,
+    )
+
+
+# ==========================================================================
+# PAGE 4 — CONTACT
+# ==========================================================================
+def page_contact():
+    body = f"""
+<section class="page-hero">
+  <div class="wrap" style="position:relative;z-index:1;">
+    <div class="crumbs"><a href="index.html">Home</a> <span>/</span> Contact</div>
+    <h1 class="h-display">Get in touch.</h1>
+    <p>Speak directly with our team. Licensing guidance, dealer locator, custom orders and training intake &mdash; we respond within one business day.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <form class="contact-form reveal" id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="cf-name">Full Name</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" placeholder="you@example.com" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="cf-phone">Phone</label>
+            <input type="tel" id="cf-phone" name="phone" placeholder="+91"/>
+          </div>
+          <div class="field">
+            <label for="cf-subject">Subject</label>
+            <select id="cf-subject" name="subject">
+              <option value="licensing">Licensing Enquiry</option>
+              <option value="dealer">Dealer / Distributor</option>
+              <option value="custom">Custom Order</option>
+              <option value="training">Training Programme</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" placeholder="Tell us how we can help" required></textarea>
+        </div>
+        <button class="submit" type="submit">Send Message {ICON_ARROW}</button>
+      </form>
+
+      <!-- DETAILS -->
+      <div class="contact-card reveal">
+        <h3>Camstar Defence HQ</h3>
+
+        <div class="ci">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="meta">Phone</div>
+            <div class="v">+91 9793 849 997</div>
+          </div>
+        </div>
+
+        <div class="ci">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="meta">Email</div>
+            <div class="v">info@camstardefence.com</div>
+          </div>
+        </div>
+
+        <div class="ci">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="meta">Address</div>
+            <div class="v">Camstar Defence Industries<br/>Kanpur, Uttar Pradesh<br/>India &mdash; 208 001</div>
+          </div>
+        </div>
+
+        <div class="ci">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="meta">Hours</div>
+            <div class="v">Mon&ndash;Sat &middot; 11:00 &ndash; 19:00 IST</div>
+          </div>
+        </div>
+
+        <div class="map-placeholder" aria-label="Map">
+          <div class="pin-label">Kanpur, UP &middot; 208 001</div>
+        </div>
+
+        <div style="display:flex;gap:0.6rem;margin-top:1.5rem;align-items:center;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);">Follow</span>
+          <div class="socials">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="3"/><polygon points="10,9 16,12 10,15" fill="currentColor"/></svg></a>
+            <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21l1.5-5.5A9 9 0 1 1 8.5 19.5L3 21z"/><path d="M9 12c.5 1 1.5 2 3 2.5"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 quick-action cards -->
+    <div class="contact-tri reveal" id="dealers">
+      <div class="ct-card">
+        <div class="ico-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h4>Find a Dealer</h4>
+        <p>500+ licensed dealers across India. We will route you to the closest authorised Camstar outlet.</p>
+      </div>
+      <div class="ct-card" id="training">
+        <div class="ico-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15 8 22 9 17 14 18 22 12 18 6 22 7 14 2 9 9 8 12 2"/></svg></div>
+        <h4>Training Facility</h4>
+        <p>Licensed-carry orientation, ISSF/IPSC coaching and instructor certification at our Kanpur range.</p>
+      </div>
+      <div class="ct-card">
+        <div class="ico-lg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h4>Custom Orders</h4>
+        <p>Engraving, finishes and competition tuning available on M45 ACE Lite, King 1911 and SS 1911 platforms.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="block pillars-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>02</span> / Voices</div>
+        <h2 class="h-display">What our customers say.</h2>
+      </div>
+      <p class="lede">From competition ranges to licensed carry &mdash; Camstar owners speak for themselves.</p>
+    </div>
+    <div class="testimonials reveal">
+      <div class="quote">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="mark">&ldquo;</div>
+        <p>The Star M45 ACE Lite is hands down the best pistol I've fired in India. Crisp trigger break, butter-smooth slide, and the finish holds up after 5,000 rounds. Nothing else comes close at this price point.</p>
+        <div class="who">
+          <div>
+            <div class="name">Rajesh Kumar</div>
+            <div class="loc">Delhi &mdash; Competition Shooter</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="mark">&ldquo;</div>
+        <p>I've carried the BAAZ 30 for three years. Three safeties, solid lockup, not a single malfunction. This is what a defence sidearm should be &mdash; reliable when it matters and nothing else.</p>
+        <div class="who">
+          <div>
+            <div class="name">Col. S. Verma (Retd.)</div>
+            <div class="loc">Lucknow &mdash; Licensed Carry</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="mark">&ldquo;</div>
+        <p>Camstar's training facility in Kanpur is exceptional. The instructors know the product, the range is world-class, and shooting the Star M32 in competition has measurably improved my consistency.</p>
+        <div class="who">
+          <div>
+            <div class="name">Priya Sharma</div>
+            <div class="loc">Kanpur &mdash; Sport Shooter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+    return shell(
+        title="Contact &ndash; Camstar Defence",
+        description="Contact Camstar Defence for licensing guidance, dealer locator, custom orders and training intake. Kanpur, India.",
+        active="contact",
+        body=body,
+    )
+
+
+# ==========================================================================
+# WRITE FILES
+# ==========================================================================
+def main():
+    out = {
+        "index.html":    page_index(),
+        "products.html": page_products(),
+        "about.html":    page_about(),
+        "contact.html":  page_contact(),
+    }
+    for name, html in out.items():
+        path = os.path.join(ROOT, name)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(html)
+        print(f"[+] wrote {name}  ({len(html):,} bytes)")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Camstar Defence – Precision Firearms · EST. 1997</title>
+<meta name="description" content="India's precision firearms manufacturer — engineering sidearms for marksmen, sport shooters and licensed professionals since 1997."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--bg-0);
+  color:var(--ink-0);
+  line-height:1.6;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+  opacity:0.025;
+  pointer-events:none;
+  z-index:0;
+}
+img,video{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{cursor:pointer;border:none;background:none;font:inherit;}
+input{font:inherit;}
+address{font-style:normal;}
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --bg-0:#0a0a0a;
+  --bg-1:#111;
+  --bg-2:#161616;
+  --bg-3:#1c1c1c;
+  --ink-0:#f7f6f3;
+  --ink-1:#c8c5bf;
+  --ink-2:#8b8780;
+  --ink-3:#57534e;
+  --red:#d11e3a;
+  --red-deep:#8b0a1e;
+  --radius:4px;
+  --radius-lg:10px;
+  --border:1px solid rgba(247,246,243,0.06);
+  --transition:0.22s cubic-bezier(0.25,0.46,0.45,0.94);
+  --wrap:1200px;
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(1.25rem,5vw,2.5rem);}
+.eyebrow{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:1rem;
+}
+.eyebrow.center{display:block;text-align:center;}
+.h-display{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(2.4rem,5.5vw,4.5rem);
+  line-height:1.0;
+  letter-spacing:0.01em;
+  text-transform:uppercase;
+  color:var(--ink-0);
+}
+.lede{font-size:1.05rem;color:var(--ink-1);max-width:480px;line-height:1.7;}
+.btn-primary{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  background:var(--red);
+  color:#fff;
+  font-size:0.82rem;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:0.75rem 1.6rem;
+  border-radius:var(--radius);
+  transition:background var(--transition),transform var(--transition);
+  position:relative;
+  z-index:1;
+}
+.btn-primary:hover{background:#b5172f;transform:translateY(-1px);}
+.btn-ghost{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  background:transparent;
+  color:var(--ink-0);
+  font-size:0.82rem;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:0.73rem 1.5rem;
+  border-radius:var(--radius);
+  border:1px solid rgba(247,246,243,0.15);
+  transition:border-color var(--transition),color var(--transition),transform var(--transition);
+}
+.btn-ghost:hover{border-color:var(--ink-0);transform:translateY(-1px);}
+.block{padding-block:clamp(4rem,9vw,7rem);}
+
+/* ============================================================
+   UTILITY BAR
+   ============================================================ */
+.util-bar{
+  background:var(--red-deep);
+  color:#fff;
+  font-size:0.72rem;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0.1em;
+  text-align:center;
+  padding:0.45rem 1rem;
+  text-transform:uppercase;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:900;
+  background:rgba(10,10,10,0.88);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:var(--border);
+}
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:64px;
+  gap:2rem;
+}
+.brand{display:flex;align-items:center;gap:0.75rem;flex-shrink:0;}
+.brand-mark{
+  width:36px;height:36px;
+  background:var(--red);
+  border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Anton',sans-serif;
+  font-size:1.1rem;
+  color:#fff;
+  letter-spacing:-0.02em;
+}
+.brand-text{display:flex;flex-direction:column;line-height:1.1;}
+.brand-text .name{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-0);}
+.brand-text .sub{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;color:var(--ink-2);text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:0.25rem;flex:1;justify-content:center;}
+.nav-links a{
+  font-size:0.78rem;
+  font-weight:500;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  padding:0.4rem 0.85rem;
+  border-radius:var(--radius);
+  transition:color var(--transition),background var(--transition);
+}
+.nav-links a:hover{color:var(--ink-0);background:rgba(247,246,243,0.06);}
+.nav-right{display:flex;align-items:center;gap:0.75rem;flex-shrink:0;}
+.nav-cta{
+  background:var(--red);
+  color:#fff;
+  font-size:0.75rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:0.5rem 1.2rem;
+  border-radius:var(--radius);
+  transition:background var(--transition);
+}
+.nav-cta:hover{background:#b5172f;}
+.nav-toggle{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  padding:0.5rem;
+  border-radius:var(--radius);
+  transition:background var(--transition);
+}
+.nav-toggle:hover{background:rgba(247,246,243,0.08);}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--ink-0);border-radius:1px;transition:var(--transition);}
+.mobile-menu{
+  display:none;
+  flex-direction:column;
+  gap:0;
+  background:var(--bg-1);
+  border-top:var(--border);
+  padding:1rem 0;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-size:0.85rem;
+  font-weight:500;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--ink-1);
+  padding:0.75rem clamp(1.25rem,5vw,2.5rem);
+  border-bottom:1px solid rgba(247,246,243,0.04);
+  transition:color var(--transition);
+}
+.mobile-menu a:hover{color:var(--ink-0);}
+@media(max-width:860px){
+  .nav-links,.nav-right .nav-cta{display:none;}
+  .nav-toggle{display:flex;}
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:calc(100svh - 64px - 36px);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:center;
+  padding-block:clamp(3rem,8vw,6rem);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-20%;left:-10%;
+  width:60%;height:80%;
+  background:radial-gradient(ellipse at center,rgba(209,30,58,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-left{position:relative;z-index:1;}
+.hero-right{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;}
+.hero-eyebrow{margin-bottom:1.25rem;}
+.hero-headline{margin-bottom:1.5rem;}
+.hero-headline .strike{
+  position:relative;
+  color:var(--ink-2);
+}
+.hero-headline .strike::after{
+  content:'';
+  position:absolute;
+  left:0;top:52%;
+  width:100%;height:2px;
+  background:var(--red);
+  transform:translateY(-50%);
+}
+.hero-headline .accent{color:var(--red);}
+.hero-sub{
+  color:var(--ink-1);
+  font-size:1rem;
+  line-height:1.75;
+  max-width:440px;
+  margin-bottom:2rem;
+}
+.hero-ctas{display:flex;gap:0.75rem;flex-wrap:wrap;}
+.hero-art{
+  position:relative;
+  width:min(420px,90%);
+  aspect-ratio:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero-art .corners{position:absolute;inset:0;}
+.hero-art .corners::before,
+.hero-art .corners::after,
+.corners-inner::before,
+.corners-inner::after{
+  content:'';
+  position:absolute;
+  width:24px;height:24px;
+  border-color:var(--red);
+  border-style:solid;
+}
+.hero-art .corners::before{top:0;left:0;border-width:2px 0 0 2px;}
+.hero-art .corners::after{top:0;right:0;border-width:2px 2px 0 0;}
+.corners-inner::before{bottom:0;left:0;border-width:0 0 2px 2px;}
+.corners-inner::after{bottom:0;right:0;border-width:0 2px 2px 0;}
+.hero-art .silhouette{
+  width:72%;height:72%;
+  background:linear-gradient(135deg,var(--bg-2) 0%,var(--bg-3) 100%);
+  border-radius:50%;
+  border:1px solid rgba(209,30,58,0.2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-art .silhouette::before{
+  content:'';
+  position:absolute;inset:0;
+  background:conic-gradient(from 0deg,transparent 0deg,rgba(209,30,58,0.12) 60deg,transparent 120deg);
+  animation:spin 8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hero-art .silhouette svg{
+  width:55%;height:55%;
+  color:var(--ink-0);
+  position:relative;z-index:1;
+  filter:drop-shadow(0 0 20px rgba(209,30,58,0.4));
+}
+.hero-art .tag{
+  position:absolute;bottom:10%;right:-5%;
+  background:var(--bg-2);
+  border:var(--border);
+  border-radius:var(--radius);
+  padding:0.6rem 0.9rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  color:var(--ink-1);
+  text-transform:uppercase;
+  backdrop-filter:blur(10px);
+}
+.hero-art .tag strong{display:block;color:var(--red);font-size:0.85rem;font-family:'Anton',sans-serif;letter-spacing:0.04em;}
+@media(max-width:780px){
+  .hero{grid-template-columns:1fr;text-align:center;}
+  .hero-right{display:none;}
+  .hero-sub,.lede{margin-inline:auto;}
+  .hero-ctas{justify-content:center;}
+}
+
+/* ============================================================
+   STATS STRIP
+   ============================================================ */
+.stats{
+  background:var(--bg-1);
+  border-block:var(--border);
+  padding-block:2.5rem;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+  text-align:center;
+}
+.stat-item{padding:1rem;}
+.stat-num{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(2.2rem,4vw,3.2rem);
+  color:var(--ink-0);
+  line-height:1;
+  display:flex;align-items:baseline;justify-content:center;gap:0.1em;
+}
+.stat-num sup{font-size:0.55em;color:var(--red);}
+.stat-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.68rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  margin-top:0.4rem;
+}
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(2rem,6vw,5rem);
+  align-items:center;
+  margin-top:3rem;
+}
+.about-copy p{color:var(--ink-1);line-height:1.8;margin-bottom:1.2rem;}
+.about-copy p:last-child{margin-bottom:0;}
+.about-visual{
+  position:relative;
+  aspect-ratio:4/3;
+  background:var(--bg-2);
+  border-radius:var(--radius-lg);
+  border:var(--border);
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.about-visual::before{
+  content:'EST.\A1997';
+  white-space:pre;
+  font-family:'Anton',sans-serif;
+  font-size:clamp(3rem,8vw,6rem);
+  color:rgba(247,246,243,0.04);
+  text-align:center;
+  letter-spacing:0.05em;
+}
+.about-visual .badge{
+  position:absolute;bottom:1.5rem;right:1.5rem;
+  background:var(--red);
+  color:#fff;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:0.4rem 0.8rem;
+  border-radius:var(--radius);
+}
+.section-head{margin-bottom:3rem;}
+.section-head .meta{margin-bottom:0.75rem;}
+.section-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;
+}
+.section-num span{color:var(--red);}
+@media(max-width:700px){
+  .about-grid{grid-template-columns:1fr;}
+  .about-visual{aspect-ratio:16/7;}
+}
+
+/* ============================================================
+   PILLARS
+   ============================================================ */
+.pillars-bg{background:var(--bg-1);border-block:var(--border);}
+.pillars-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(247,246,243,0.05);
+  border:1px solid rgba(247,246,243,0.05);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  margin-top:3rem;
+}
+.pillar{
+  background:var(--bg-1);
+  padding:2rem 1.5rem;
+  transition:background var(--transition);
+}
+.pillar:hover{background:var(--bg-2);}
+.pillar-icon{
+  width:44px;height:44px;
+  background:rgba(209,30,58,0.1);
+  border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--red);
+  margin-bottom:1.25rem;
+}
+.pillar h3{
+  font-family:'Anton',sans-serif;
+  font-size:1.15rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  margin-bottom:0.6rem;
+  color:var(--ink-0);
+}
+.pillar p{font-size:0.85rem;color:var(--ink-2);line-height:1.65;}
+@media(max-width:780px){
+  .pillars-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:440px){
+  .pillars-grid{grid-template-columns:1fr;}
+}
+
+/* ============================================================
+   PRODUCTS
+   ============================================================ */
+.products-section{padding-block:clamp(4rem,9vw,7rem);}
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1px;
+  background:rgba(247,246,243,0.05);
+  border:1px solid rgba(247,246,243,0.05);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  margin-top:3rem;
+}
+.product{
+  background:var(--bg-1);
+  padding:1.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  transition:background var(--transition),transform var(--transition);
+  cursor:pointer;
+  position:relative;
+}
+.product:hover{background:var(--bg-2);}
+.product.feature{
+  background:linear-gradient(135deg,var(--bg-2) 0%,rgba(139,10,30,0.12) 100%);
+  grid-column:span 2;
+}
+.product.feature:hover{background:linear-gradient(135deg,var(--bg-3) 0%,rgba(139,10,30,0.2) 100%);}
+.product-sku{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+.product-name{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(1.2rem,2.5vw,1.6rem);
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  color:var(--ink-0);
+  line-height:1.1;
+}
+.product.feature .product-name{font-size:clamp(1.5rem,3vw,2.2rem);}
+.product-desc{font-size:0.83rem;color:var(--ink-2);line-height:1.6;flex:1;}
+.product-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:0.25rem 0.55rem;
+  border-radius:2px;
+  background:rgba(247,246,243,0.05);
+  color:var(--ink-2);
+  border:1px solid rgba(247,246,243,0.08);
+}
+.tag.red{background:rgba(209,30,58,0.12);color:var(--red);border-color:rgba(209,30,58,0.2);}
+.product-arrow{
+  position:absolute;
+  top:1.5rem;right:1.5rem;
+  width:30px;height:30px;
+  border-radius:50%;
+  border:1px solid rgba(247,246,243,0.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink-3);
+  transition:border-color var(--transition),color var(--transition),background var(--transition);
+}
+.product:hover .product-arrow{border-color:var(--red);color:var(--red);background:rgba(209,30,58,0.08);}
+@media(max-width:680px){
+  .product.feature{grid-column:span 1;}
+}
+
+/* ============================================================
+   SPOTLIGHT
+   ============================================================ */
+.spotlight{
+  background:var(--bg-1);
+  border-block:var(--border);
+  padding-block:clamp(4rem,9vw,7rem);
+}
+.spotlight-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(2rem,6vw,5rem);
+  align-items:center;
+}
+.spotlight-inner h2{margin-bottom:1.25rem;}
+.spotlight-inner p{color:var(--ink-1);line-height:1.8;margin-bottom:2rem;max-width:420px;}
+.specs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(247,246,243,0.05);
+  border:1px solid rgba(247,246,243,0.05);
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:2rem;
+}
+.spec{
+  background:var(--bg-2);
+  padding:1rem;
+  text-align:center;
+}
+.spec .k{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-bottom:0.3rem;
+}
+.spec .v{
+  font-family:'Anton',sans-serif;
+  font-size:1.3rem;
+  letter-spacing:0.02em;
+  color:var(--ink-0);
+}
+.spotlight-visual{
+  position:relative;
+  aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+  max-width:420px;
+  margin-inline:auto;
+}
+.spotlight-visual .ring{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(209,30,58,0.2);
+}
+.spotlight-visual .ring:nth-child(1){width:80%;height:80%;}
+.spotlight-visual .ring:nth-child(2){width:60%;height:60%;border-color:rgba(209,30,58,0.3);animation:pulse 3s ease-in-out infinite;}
+.spotlight-visual .ring:nth-child(3){width:40%;height:40%;border-color:rgba(209,30,58,0.5);animation:pulse 3s ease-in-out 0.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.05);}}
+.spotlight-visual .crosshair{
+  position:absolute;
+  background:rgba(209,30,58,0.3);
+}
+.spotlight-visual .crosshair:not(.v){width:70%;height:1px;}
+.spotlight-visual .crosshair.v{width:1px;height:70%;}
+.spotlight-visual .target{
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 20px rgba(209,30,58,0.8),0 0 40px rgba(209,30,58,0.4);
+  animation:targetPulse 2s ease-in-out infinite;
+}
+@keyframes targetPulse{0%,100%{box-shadow:0 0 20px rgba(209,30,58,0.8),0 0 40px rgba(209,30,58,0.4);}50%{box-shadow:0 0 30px rgba(209,30,58,1),0 0 60px rgba(209,30,58,0.6);}}
+@media(max-width:700px){
+  .spotlight-inner{grid-template-columns:1fr;}
+  .spotlight-visual{max-width:280px;aspect-ratio:1;}
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(247,246,243,0.05);
+  border:1px solid rgba(247,246,243,0.05);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  margin-top:3rem;
+}
+.quote{
+  background:var(--bg-1);
+  padding:2rem 1.75rem;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  transition:background var(--transition);
+}
+.quote:hover{background:var(--bg-2);}
+.stars{color:var(--red);font-size:0.85rem;letter-spacing:0.1em;}
+.mark{
+  font-family:'Anton',sans-serif;
+  font-size:3rem;
+  color:var(--red);
+  line-height:0.8;
+  opacity:0.4;
+}
+.quote p{font-size:0.88rem;color:var(--ink-1);line-height:1.75;flex:1;}
+.who{display:flex;align-items:center;gap:0.75rem;padding-top:1rem;border-top:1px solid rgba(247,246,243,0.06);}
+.name{font-weight:600;font-size:0.85rem;color:var(--ink-0);}
+.loc{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin-top:0.15rem;}
+@media(max-width:760px){
+  .testimonials{grid-template-columns:1fr;}
+}
+
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta{
+  background:linear-gradient(135deg,var(--bg-1) 0%,rgba(139,10,30,0.18) 100%);
+  border-top:var(--border);
+  padding-block:clamp(4rem,9vw,7rem);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.cta::before{
+  content:'';
+  position:absolute;
+  top:-40%;left:50%;
+  transform:translateX(-50%);
+  width:800px;height:800px;
+  background:radial-gradient(ellipse at center,rgba(209,30,58,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cta .h-display{margin-bottom:1rem;}
+.cta p{color:var(--ink-1);font-size:1rem;line-height:1.75;max-width:520px;margin-inline:auto;margin-bottom:2.5rem;}
+.cta-form{
+  display:flex;
+  gap:0;
+  max-width:460px;
+  margin-inline:auto;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid rgba(247,246,243,0.1);
+}
+.cta-form input{
+  flex:1;
+  background:var(--bg-2);
+  color:var(--ink-0);
+  border:none;
+  padding:0.85rem 1.2rem;
+  font-size:0.88rem;
+  outline:none;
+}
+.cta-form input::placeholder{color:var(--ink-3);}
+.cta-form button{
+  background:var(--red);
+  color:#fff;
+  font-size:0.82rem;
+  font-weight:600;
+  letter-spacing:0.06em;
+  padding:0.85rem 1.4rem;
+  white-space:nowrap;
+  transition:background var(--transition);
+}
+.cta-form button:hover{background:#b5172f;}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  background:var(--bg-1);
+  border-top:var(--border);
+  padding-block:clamp(3rem,6vw,5rem);
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1.5fr;
+  gap:3rem;
+  margin-bottom:3rem;
+}
+.footer-brand p{
+  font-size:0.82rem;
+  color:var(--ink-2);
+  line-height:1.7;
+  margin-top:1rem;
+  max-width:260px;
+}
+.footer h5{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-bottom:1.2rem;
+}
+.footer-list li{margin-bottom:0.6rem;}
+.footer-list a{
+  font-size:0.83rem;
+  color:var(--ink-2);
+  transition:color var(--transition);
+}
+.footer-list a:hover{color:var(--ink-0);}
+.footer address .row{
+  display:grid;
+  grid-template-columns:70px 1fr;
+  gap:0.5rem;
+  font-size:0.8rem;
+  color:var(--ink-2);
+  margin-bottom:0.7rem;
+  line-height:1.5;
+}
+.footer address .row strong{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  align-self:start;
+  padding-top:0.15rem;
+}
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding-top:2rem;
+  border-top:var(--border);
+  flex-wrap:wrap;
+}
+.footer-bottom span{
+  font-size:0.75rem;
+  color:var(--ink-3);
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0.06em;
+}
+.socials{display:flex;gap:0.5rem;}
+.socials a{
+  width:34px;height:34px;
+  border-radius:var(--radius);
+  border:1px solid rgba(247,246,243,0.08);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink-2);
+  transition:border-color var(--transition),color var(--transition);
+}
+.socials a svg{width:16px;height:16px;}
+.socials a:hover{border-color:var(--red);color:var(--red);}
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:520px){
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+
+/* Product images */
+.product-photo {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.5s ease, opacity 0.4s ease;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+}
+.product:hover .product-photo {
+  transform: scale(1.06);
+}
+.product.feature .product-photo {
+  width: 75%;
+  height: 75%;
+}
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="util-bar">
+  Licensed Firearms Manufacturer · India · +91 9793 849 997 · info@camstardefence.com
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="brand">
+      <img src="wp-content/uploads/2025/08/Logo-03-1-2.png" alt="Camstar Defence" style="height:42px;width:auto;filter:brightness(0) invert(1);" />
+      <div class="brand-text">
+        <span class="name">Camstar</span>
+        <span class="sub">Defence · EST. 1997</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#pillars">Why Camstar</a>
+      <a href="#products">Arsenal</a>
+      <a href="#spotlight">Featured</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="#contact" class="nav-cta">Enquire Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#pillars">Why Camstar</a>
+    <a href="#products">Arsenal</a>
+    <a href="#spotlight">Featured</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact &amp; Enquiry</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero block" id="hero">
+  <div class="hero-left" style="padding-inline:clamp(1.25rem,5vw,2.5rem)">
+    <span class="eyebrow hero-eyebrow">India's Premier Firearms Manufacturer · Since 1997</span>
+    <h1 class="h-display hero-headline">
+      Precision.<br/>
+      <span class="strike">Engineered.</span><br/>
+      <span class="accent">Proven.</span>
+    </h1>
+    <p class="hero-sub">Camstar Defence has been manufacturing precision firearms for licensed professionals, sport shooters and marksmen across India for over 27 years. Every sidearm built to uncompromising standards.</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-primary">
+        <span>Explore Arsenal</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Request Demo</a>
+    </div>
+  </div>
+  <div class="hero-right" style="padding-inline:clamp(1.25rem,5vw,2.5rem)">
+    <div class="hero-art">
+      <div class="corners"></div>
+      <div class="corners-inner"></div>
+      <div class="silhouette">
+        <img src="wp-content/uploads/2025/08/M45-Ace-Lite-101-Right-WEBP-1.webp" alt="Star M45 ACE Lite" style="width:90%;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(209,30,58,0.35));" />
+      </div>
+      <div class="tag">
+        <strong>BAAZ 30</strong>
+        Defence Grade · .30 Bore
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">
+          <span data-count="27">0</span><sup>+</sup>
+        </div>
+        <div class="stat-label">Years of Manufacture</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">
+          <span data-count="13">0</span><sup>+</sup>
+        </div>
+        <div class="stat-label">Active Models</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">
+          <span data-count="50000">0</span><sup>+</sup>
+        </div>
+        <div class="stat-label">Firearms Manufactured</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">
+          <span data-count="500">0</span><sup>+</sup>
+        </div>
+        <div class="stat-label">Licensed Dealers</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>01</span> / About</div>
+        <h2 class="h-display">Built in India.<br/>Built to last.</h2>
+      </div>
+      <p class="lede">Since 1997, Camstar Defence has stood for uncompromising precision in Indian firearms manufacturing.</p>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-copy">
+        <p>Founded in Kanpur — India's historic arms manufacturing hub — Camstar Defence has grown from a regional manufacturer into one of the most respected names in Indian precision firearms. Our factory operates under the strictest compliance frameworks, with every firearm individually tested before dispatch.</p>
+        <p>We serve licensed individual owners, sport shooting associations, private security operators and government-approved dealers across the country. Our training facility in Kanpur hosts certified marksmanship programmes year-round.</p>
+        <p>From the classic .30 bore platform to our modern .45 ACP competition pistols, every Camstar sidearm carries 27 years of engineering refinement. Steel-on-steel lockup, hand-fitted components, and a finish that endures thousands of rounds.</p>
+        <div style="margin-top:1.5rem;">
+          <a href="#contact" class="btn-primary">
+            <span>Contact Our Team</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="badge">Kanpur · UP · India</div>
+        <img src="wp-content/uploads/2025/08/Star-M32-Landspace_1_11zon.jpg" alt="Camstar manufacturing" style="width:100%;height:100%;object-fit:cover;opacity:0.45;position:absolute;inset:0;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="block pillars-bg" id="pillars">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>02</span> / Why Camstar</div>
+        <h2 class="h-display">Engineering first.<br/>Always.</h2>
+      </div>
+      <p class="lede">Four pillars that define every firearm that leaves our factory floor.</p>
+    </div>
+    <div class="pillars-grid reveal">
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+            <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div>
+        <h3>Precision Machining</h3>
+        <p>CNC-machined components held to tolerances of ±0.01mm. Steel-on-steel lockup for zero-play action every cycle.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3>Multi-Layer Safety</h3>
+        <p>Up to three independent safety mechanisms on defence-grade models. Ambidextrous controls on select platforms.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3>Field Reliability</h3>
+        <p>Every model endures 5,000-round proof testing before production approval. Designed for India's demanding climate and conditions.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <h3>Competition Proven</h3>
+        <p>Used in national-level sport shooting competitions. Preferred by ISSF-affiliated clubs and marksmanship academies across India.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>03</span> / Arsenal</div>
+        <h2 class="h-display">The full lineup.</h2>
+      </div>
+      <p class="lede">Every model engineered for a purpose — from licensed carry to competition-grade sport shooting.</p>
+    </div>
+    <div class="product-grid reveal">
+
+      <!-- Feature: M45 ACE -->
+      <div class="product feature">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: M45-ACE</div>
+        <div class="product-name">Star M45<br/>ACE Lite</div>
+        <div class="pad"><img src="wp-content/uploads/2025/08/M45-Ace-Lite-101-Right-WEBP-1.webp" alt="Star M45 ACE Lite" class="product-photo" /></div>
+        <div class="product-desc">Our flagship competition pistol in .45 ACP. Lightweight alloy frame, match-grade barrel, adjustable rear sight. Designed for IPSC and ISSF sport shooting at the highest level.</div>
+        <div class="product-tags">
+          <span class="tag red">Flagship</span>
+          <span class="tag">.45 ACP</span>
+          <span class="tag">Competition</span>
+          <span class="tag">Alloy Frame</span>
+        </div>
+      </div>
+
+      <!-- TT30 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: TT-30</div>
+        <div class="product-name">Star TT 30</div>
+        <div class="pad"><img src="wp-content/uploads/2026/05/Star-TT30-Special-Right.png" alt="Star TT30 Special" class="product-photo" /></div>
+        <div class="product-desc">Classic Tokarev-pattern pistol in .30 bore. Proven action, all-steel construction, beloved by licensed carry owners across India.</div>
+        <div class="product-tags">
+          <span class="tag">.30 Bore</span>
+          <span class="tag">Classic</span>
+          <span class="tag">All-Steel</span>
+        </div>
+      </div>
+
+      <!-- M32 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: M32</div>
+        <div class="product-name">Star M32</div>
+        <div class="pad"><img src="wp-content/uploads/2025/08/Star-M32-Right.webp" alt="Star M32" class="product-photo" /></div>
+        <div class="product-desc">Modern 9mm pistol with polymer-grip steel frame. Ergonomic design, improved sights and a refined trigger for sport shooters demanding consistency.</div>
+        <div class="product-tags">
+          <span class="tag">9mm</span>
+          <span class="tag">Sport</span>
+          <span class="tag">Modern</span>
+        </div>
+      </div>
+
+      <!-- M30 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: M30</div>
+        <div class="product-name">Star M30</div>
+        <div class="pad"><img src="wp-content/uploads/2025/08/Star-M30-Classic-Right-Black.webp" alt="Star M30" class="product-photo" /></div>
+        <div class="product-desc">A refined .30 bore pistol combining modern ergonomics with the reliability of the Tokarev platform. Ideal for new licensed owners.</div>
+        <div class="product-tags">
+          <span class="tag">.30 Bore</span>
+          <span class="tag">Ergonomic</span>
+          <span class="tag">Reliable</span>
+        </div>
+      </div>
+
+      <!-- Super30 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: S30</div>
+        <div class="product-name">Super 30</div>
+        <div class="pad"><img src="wp-content/uploads/2025/08/Super-30-Right-scaled.webp" alt="Star Super 30" class="product-photo" /></div>
+        <div class="product-desc">Enhanced .30 bore platform with improved barrel crown, extended grip and target-spec sights. Camstar's sharpshooter's choice for .30 bore.</div>
+        <div class="product-tags">
+          <span class="tag">.30 Bore</span>
+          <span class="tag">Enhanced</span>
+          <span class="tag">Target</span>
+        </div>
+      </div>
+
+      <!-- X32 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: X32</div>
+        <div class="product-name">Star X32</div>
+        <div class="pad"><img src="wp-content/uploads/2025/08/Star-X32-Right-1.webp" alt="Star X32" class="product-photo" /></div>
+        <div class="product-desc">Competition-oriented 9mm with extended magazine capacity and ambidextrous safety. Designed for stage shooting and high-volume practice.</div>
+        <div class="product-tags">
+          <span class="tag">9mm</span>
+          <span class="tag">Extended Mag</span>
+          <span class="tag">Ambidextrous</span>
+        </div>
+      </div>
+
+      <!-- Bolt30 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: B30</div>
+        <div class="product-name">Bolt 30</div>
+        <div class="pad"><img src="wp-content/uploads/2025/08/Star-Bolt-30-Right-1.webp" alt="Star Bolt 30" class="product-photo" /></div>
+        <div class="product-desc">Compact .30 bore with shortened slide and grip. Purpose-built for concealed licensed carry while retaining the legendary Camstar reliability.</div>
+        <div class="product-tags">
+          <span class="tag">.30 Bore</span>
+          <span class="tag">Compact</span>
+          <span class="tag">Carry</span>
+        </div>
+      </div>
+
+      <!-- Max32 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: MX32</div>
+        <div class="product-name">Max 32</div>
+        <div class="pad"><img src="wp-content/uploads/2025/08/Star-Max-32-Right-1.webp" alt="Star Max 32" class="product-photo" /></div>
+        <div class="product-desc">Full-size 9mm with maximum-capacity magazine and full-length rail. Camstar's most feature-rich 9mm for sport and defence applications.</div>
+        <div class="product-tags">
+          <span class="tag">9mm</span>
+          <span class="tag">Full-Size</span>
+          <span class="tag">Rail Equipped</span>
+        </div>
+      </div>
+
+      <!-- King1911 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: K1911</div>
+        <div class="product-name">Star King<br/>1911</div>
+        <div class="pad"><img src="wp-content/uploads/2026/05/Star-King-1911-Right.png" alt="Star King 1911" class="product-photo" /></div>
+        <div class="product-desc">A premium 1911-platform pistol in .45 ACP. Hand-fitted barrel bushing, beavertail safety, match trigger. A collector's piece that shoots like a competition gun.</div>
+        <div class="product-tags">
+          <span class="tag">.45 ACP</span>
+          <span class="tag">1911 Platform</span>
+          <span class="tag">Premium</span>
+        </div>
+      </div>
+
+      <!-- Feature: BAAZ30 -->
+      <div class="product feature">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: BAAZ-30</div>
+        <div class="product-name">BAAZ 30</div>
+        <div class="pad"><img src="wp-content/uploads/2026/05/BAAZ-30-scaled.png" alt="BAAZ 30" class="product-photo" /></div>
+        <div class="product-desc">Our most requested defence-grade model. Three independent safeties, steel-on-steel lockup, corrosion-resistant finish. Built for licensed professionals who cannot afford failure.</div>
+        <div class="product-tags">
+          <span class="tag red">Defence Grade</span>
+          <span class="tag">.30 Bore</span>
+          <span class="tag">3× Safety</span>
+          <span class="tag">Pro</span>
+        </div>
+      </div>
+
+      <!-- FX-100 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: FX-100</div>
+        <div class="product-name">FX-100</div>
+        <div class="pad"><img src="wp-content/uploads/2026/05/FX-100-Right.png" alt="Star FX-100" class="product-photo" /></div>
+        <div class="product-desc">Camstar's next-generation platform. Modular grip system, optic-ready slide, extended Picatinny rail. The future of Indian sport shooting sidearms.</div>
+        <div class="product-tags">
+          <span class="tag red">New</span>
+          <span class="tag">9mm</span>
+          <span class="tag">Optic Ready</span>
+          <span class="tag">Modular</span>
+        </div>
+      </div>
+
+      <!-- Star 30 Original -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: 30-OG</div>
+        <div class="product-name">Star 30<br/>Original</div>
+        <div class="pad"><img src="wp-content/uploads/2026/05/Star-30-Original-Right-1.png" alt="Star 30 Original" class="product-photo" /></div>
+        <div class="product-desc">The firearm that started it all. Camstar's original .30 bore pistol — a testament to the design principles that have guided every model since 1997.</div>
+        <div class="product-tags">
+          <span class="tag">.30 Bore</span>
+          <span class="tag">Classic</span>
+          <span class="tag">Heritage</span>
+        </div>
+      </div>
+
+      <!-- Star SS 1911 -->
+      <div class="product">
+        <div class="product-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+        <div class="product-sku">SKU: SS-1911</div>
+        <div class="product-name">Star SS<br/>1911</div>
+        <div class="pad"><img src="wp-content/uploads/2026/05/Star-SS-1911-Right.png" alt="Star SS 1911" class="product-photo" /></div>
+        <div class="product-desc">The stainless variant of our acclaimed 1911 platform. Mirror-polished stainless steel construction with all the match-grade internals of the King 1911.</div>
+        <div class="product-tags">
+          <span class="tag">1911 Platform</span>
+          <span class="tag">Stainless</span>
+          <span class="tag">.45 ACP</span>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<section class="spotlight" id="spotlight">
+  <div class="wrap spotlight-inner">
+    <div>
+      <span class="eyebrow">Section 04 / Featured</span>
+      <h2 class="h-display">BAAZ 30.<br/>Defence grade.<br/>Field tested.</h2>
+      <p>The BAAZ 30 is our most requested model — a defence-grade .30 bore pistol engineered for reliability in the hands of licensed professionals. Three independent safeties. Steel-on-steel lockup. Proven in the field.</p>
+      <div class="specs">
+        <div class="spec"><div class="k">Calibre</div><div class="v">.30 Bore</div></div>
+        <div class="spec"><div class="k">Capacity</div><div class="v">8+1</div></div>
+        <div class="spec"><div class="k">Safeties</div><div class="v">3×</div></div>
+      </div>
+      <a href="#contact" class="btn-primary">
+        <span>Request Demo</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="spotlight-visual">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="crosshair"></div>
+      <div class="crosshair v"></div>
+      <div class="target"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="block" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="section-num"><span>05</span> / Reviews</div>
+        <h2 class="h-display">Trusted by marksmen<br/>across India.</h2>
+      </div>
+      <p class="lede">From competition ranges to licensed carry — Camstar owners speak for themselves.</p>
+    </div>
+    <div class="testimonials reveal">
+      <div class="quote">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="mark">&ldquo;</div>
+        <p>The Star M45 ACE Lite is hands down the best pistol I've fired in India. The trigger break is crisp, the slide is butter-smooth, and the finish holds up after 5,000 rounds. Nothing else comes close at this price point.</p>
+        <div class="who">
+          <div>
+            <div class="name">Rajesh Kumar</div>
+            <div class="loc">Delhi — Competition Shooter</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="mark">&ldquo;</div>
+        <p>I've been carrying the BAAZ 30 for three years. Three safeties, solid lockup, not a single malfunction. This is what a defence sidearm should be — reliable when it matters and nothing else.</p>
+        <div class="who">
+          <div>
+            <div class="name">Col. S. Verma (Retd.)</div>
+            <div class="loc">Lucknow — Licensed Carry</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="mark">&ldquo;</div>
+        <p>Camstar's training facility in Kanpur is exceptional. The instructors know the product, the range is world-class, and using a Star M32 in competition has improved my consistency measurably.</p>
+        <div class="who">
+          <div>
+            <div class="name">Priya Sharma</div>
+            <div class="loc">Kanpur — Sport Shooter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <span class="eyebrow center">06 / Contact</span>
+    <h2 class="h-display">Ready to acquire<br/>your sidearm?</h2>
+    <p>Speak directly with our team. Licensing guidance, dealer network, custom orders and training enquiries — we respond within one business day.</p>
+    <div class="cta-form">
+      <input type="email" placeholder="Your email address"/>
+      <button type="submit">Send &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <div class="brand-mark"><span>C</span></div>
+          <div class="brand-text">
+            <span class="name">Camstar</span>
+            <span class="sub">Defence · EST. 1997</span>
+          </div>
+        </a>
+        <p>India's precision firearms manufacturer — engineering sidearms for marksmen, sport shooters and licensed professionals since 1997.</p>
+      </div>
+      <!-- Arsenal -->
+      <div>
+        <h5>Arsenal</h5>
+        <ul class="footer-list">
+          <li><a href="#">Star M45 ACE Lite</a></li>
+          <li><a href="#">Star TT 30</a></li>
+          <li><a href="#">Star M32</a></li>
+          <li><a href="#">BAAZ 30</a></li>
+          <li><a href="#">Star King 1911</a></li>
+          <li><a href="#products">View All &rarr;</a></li>
+        </ul>
+      </div>
+      <!-- Company -->
+      <div>
+        <h5>Company</h5>
+        <ul class="footer-list">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#spotlight">Featured</a></li>
+          <li><a href="#">Dealer Network</a></li>
+          <li><a href="#">Training Facility</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div>
+        <h5>Contact</h5>
+        <address>
+          <div class="row"><strong>Phone</strong>+91 9793 849 997</div>
+          <div class="row"><strong>Email</strong>info@camstardefence.com</div>
+          <div class="row"><strong>Address</strong>Camstar Defence Industries<br/>Kanpur, Uttar Pradesh<br/>India — 208 001</div>
+          <div class="row"><strong>Hours</strong>Mon–Sat · 11:00 – 19:00 IST</div>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Camstar Defence Industries Pvt. Ltd. All rights reserved.</span>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="5" width="20" height="14" rx="3"/>
+            <polygon points="10,9 16,12 10,15" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 21l1.5-5.5A9 9 0 1 1 8.5 19.5L3 21z"/>
+            <path d="M9 12c.5 1 1.5 2 3 2.5"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile nav toggle
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+// Counter animation
+function animateCount(el) {
+  const target = +el.dataset.count;
+  let current = 0;
+  const step = target / 60;
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current);
+    if (current >= target) clearInterval(timer);
+  }, 16);
+}
+const counters = document.querySelectorAll('[data-count]');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); counterObs.unobserve(e.target); } });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObs.observe(c));
+
+// Scroll reveal
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Hero parallax on mouse move
+const heroLeft = document.querySelector('.hero-left');
+const heroRight = document.querySelector('.hero-right');
+let mx = 0, my = 0, cx = 0, cy = 0;
+document.addEventListener('mousemove', e => {
+  mx = (e.clientX / window.innerWidth - 0.5) * 2;
+  my = (e.clientY / window.innerHeight - 0.5) * 2;
+});
+(function raf() {
+  cx += (mx - cx) * 0.06;
+  cy += (my - cy) * 0.06;
+  if (heroLeft) heroLeft.style.transform = `translate3d(${cx * -6}px, ${cy * -4}px, 0)`;
+  if (heroRight) heroRight.style.transform = `translate3d(${cx * 12}px, ${cy * 8}px, 0)`;
+  requestAnimationFrame(raf);
+})();
+
+// Smooth hero art floating
+const heroArt = document.querySelector('.hero-art');
+if (heroArt) {
+  heroArt.style.animation = 'heroFloat 6s ease-in-out infinite';
+  const style = document.createElement('style');
+  style.textContent = '@keyframes heroFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }';
+  document.head.appendChild(style);
+}
+
+// Scroll progress bar
+const bar = document.createElement('div');
+bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#d11e3a,#ff6060);z-index:9999;box-shadow:0 0 8px rgba(209,30,58,0.8);pointer-events:none;transition:width 0.1s linear';
+document.body.appendChild(bar);
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = pct + '%';
+});
+
+// Cursor glow
+const cursor = document.createElement('div');
+cursor.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(209,30,58,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:opacity 0.3s';
+document.body.appendChild(cursor);
+let gx = 0, gy = 0, gcx = 0, gcy = 0;
+document.addEventListener('mousemove', e => { gx = e.clientX; gy = e.clientY; });
+(function gc() { gcx += (gx-gcx)*0.08; gcy += (gy-gcy)*0.08; cursor.style.left=gcx+'px'; cursor.style.top=gcy+'px'; requestAnimationFrame(gc); })();
+
+// Button hover glow
+document.querySelectorAll('.btn-primary, .nav-cta, .cta-form button').forEach(btn => {
+  btn.addEventListener('mouseenter', () => btn.style.boxShadow = '0 0 28px rgba(209,30,58,0.45)');
+  btn.addEventListener('mouseleave', () => btn.style.boxShadow = '');
+});
+</script>
+</body>
+</html>
