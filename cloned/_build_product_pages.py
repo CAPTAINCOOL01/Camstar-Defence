@@ -251,8 +251,12 @@ PRODUCTS = [
 EXTRA_CSS = """
 /* ===== PRODUCT DETAIL PAGE ===== */
 .prod-hero{
-  padding-block:clamp(3rem,7vw,5.5rem);
+  padding-block:clamp(2rem,4.5vw,3.25rem);
   position:relative;overflow:hidden;
+  background:
+    linear-gradient(rgba(20,17,13,0.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,17,13,0.028) 1px,transparent 1px);
+  background-size:44px 44px;
 }
 .prod-hero::before{
   content:'';position:absolute;top:-30%;right:-20%;width:80%;height:140%;
@@ -284,20 +288,22 @@ EXTRA_CSS = """
 }
 .gallery-main img{
   width:88%;height:88%;object-fit:contain;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(209,30,58,0.18));
+  filter:drop-shadow(0 24px 44px rgba(20,17,13,0.22));
   animation:cdFloat 6s ease-in-out infinite;
   position:relative;z-index:1;
+  transition:opacity 0.25s ease;
 }
 @keyframes cdFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.gallery-thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;}
+.gallery-thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;}
 .thumb{
-  height:90px;border-radius:var(--radius);background:var(--bg-2);border:var(--border);
+  height:84px;border-radius:var(--radius);background:var(--bg-1);border:var(--border);
   display:flex;align-items:center;justify-content:center;overflow:hidden;
   cursor:pointer;transition:border-color var(--transition),transform var(--transition);
   position:relative;
 }
 .thumb:hover{border-color:var(--red);transform:translateY(-2px);}
-.thumb img{width:75%;height:75%;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.7));}
+.thumb.active{border-color:var(--red);background:rgba(196,30,43,0.05);}
+.thumb img{width:75%;height:75%;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(20,17,13,0.2));}
 .thumb-label{
   position:absolute;left:0.5rem;bottom:0.4rem;
   font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.14em;
@@ -309,22 +315,22 @@ EXTRA_CSS = """
 .prod-tagline{color:var(--ink-1);font-size:1.05rem;line-height:1.75;max-width:480px;margin-bottom:2rem;}
 .prod-quick{
   display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:rgba(247,246,243,0.05);border:1px solid rgba(247,246,243,0.05);
-  border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;
+  background:var(--cell);border:1px solid var(--cell);
+  border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem;
 }
-.prod-quick .qi{background:var(--bg-2);padding:0.9rem 1rem;}
+.prod-quick .qi{background:var(--bg-1);padding:0.8rem 1rem;}
 .prod-quick .qi .k{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.3rem;}
 .prod-quick .qi .v{font-family:'Anton',sans-serif;font-size:1.15rem;letter-spacing:0.03em;color:var(--ink-0);}
 .prod-ctas{display:flex;gap:0.75rem;flex-wrap:wrap;}
 
 /* ===== DETAILED SPECS SECTION ===== */
-.specs-block{background:var(--bg-1);border-block:var(--border);padding-block:clamp(4rem,8vw,6rem);}
+.specs-block{background:var(--bg-1);border-block:var(--border);padding-block:var(--pad-sect);}
 .specs6{
   display:grid;grid-template-columns:repeat(6,1fr);gap:1px;
-  background:rgba(247,246,243,0.05);border:1px solid rgba(247,246,243,0.05);
-  border-radius:var(--radius-lg);overflow:hidden;margin-top:2.5rem;
+  background:var(--cell);border:1px solid var(--cell);
+  border-radius:var(--radius-lg);overflow:hidden;margin-top:1.25rem;
 }
-.specs6 .sp{background:var(--bg-1);padding:1.5rem 1.2rem;transition:background var(--transition);}
+.specs6 .sp{background:var(--bg-0);padding:1.1rem 1rem;transition:background var(--transition);}
 .specs6 .sp:hover{background:var(--bg-2);}
 .specs6 .sp .k{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.5rem;}
 .specs6 .sp .v{font-family:'Anton',sans-serif;font-size:1.25rem;letter-spacing:0.03em;color:var(--ink-0);line-height:1.15;}
@@ -332,9 +338,9 @@ EXTRA_CSS = """
 @media(max-width:520px){.specs6{grid-template-columns:repeat(2,1fr);}}
 
 /* ===== FEATURE CARDS ===== */
-.features-block{padding-block:clamp(4rem,8vw,6rem);}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(247,246,243,0.05);border:1px solid rgba(247,246,243,0.05);border-radius:var(--radius-lg);overflow:hidden;margin-top:2.5rem;}
-.feat{background:var(--bg-1);padding:2rem 1.75rem;transition:background var(--transition);}
+.features-block{padding-block:var(--pad-sect);}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--cell);border:1px solid var(--cell);border-radius:var(--radius-lg);overflow:hidden;margin-top:1.25rem;}
+.feat{background:var(--bg-1);padding:1.4rem 1.3rem;transition:background var(--transition);}
 .feat:hover{background:var(--bg-2);}
 .feat-ico{width:48px;height:48px;background:rgba(209,30,58,0.1);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--red);margin-bottom:1.25rem;}
 .feat h3{font-family:'Anton',sans-serif;font-size:1.2rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-0);margin-bottom:0.6rem;}
@@ -342,8 +348,8 @@ EXTRA_CSS = """
 @media(max-width:780px){.feat-grid{grid-template-columns:1fr;}}
 
 /* ===== RELATED PRODUCTS (3-up) ===== */
-.related-block{background:var(--bg-1);border-block:var(--border);padding-block:clamp(4rem,8vw,6rem);}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(247,246,243,0.05);border:1px solid rgba(247,246,243,0.05);border-radius:var(--radius-lg);overflow:hidden;margin-top:2.5rem;}
+.related-block{background:var(--bg-1);border-block:var(--border);padding-block:var(--pad-sect);}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--cell);border:1px solid var(--cell);border-radius:var(--radius-lg);overflow:hidden;margin-top:1.25rem;}
 @media(max-width:780px){.related-grid{grid-template-columns:1fr;}}
 """
 
@@ -371,15 +377,15 @@ def page_head(prod):
 """
 
 UTIL_BAR = """<div class="util-bar">
-  Licensed Firearms Manufacturer &middot; Made in India &middot; +91 9793 849 997 &middot; info@camstardefence.com
+  Licensed Firearms Manufacturer &middot; Made in India &middot; <a href="tel:+919793849997">+91 9793 849 997</a> &middot; <a href="mailto:info@camstardefence.com">info@camstardefence.com</a>
 </div>
 """
 
 # Nav uses ../ paths because product pages live in subfolders
-NAV = """<nav class="nav">
+NAV = """<nav class="nav" id="siteNav">
   <div class="wrap nav-inner">
     <a href="../index.html" class="brand">
-      <img src="../wp-content/uploads/2025/08/Logo-03-1-2.png" alt="Camstar Defence" style="height:42px;width:auto;filter:brightness(0) invert(1);"/>
+      <img src="../wp-content/uploads/2025/08/Logo-03-1-2.png" alt="Camstar Defence" style="height:40px;width:auto"/>
       <div class="brand-text">
         <span class="name">Camstar</span>
         <span class="sub">Defence &middot; EST. 1997</span>
@@ -392,7 +398,7 @@ NAV = """<nav class="nav">
       <a href="../contact.html">Contact</a>
     </div>
     <div class="nav-right">
-      <a href="../contact.html" class="nav-cta">Get In Touch</a>
+      <a href="../contact.html" class="nav-cta">Enquire Now</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -403,7 +409,7 @@ NAV = """<nav class="nav">
     <a href="../about.html">About</a>
     <a href="../products.html" class="active">Arsenal</a>
     <a href="../contact.html">Contact</a>
-    <a href="../contact.html">Get In Touch</a>
+    <a href="../contact.html">Enquire Now</a>
   </div>
 </nav>
 """
@@ -576,13 +582,21 @@ FOOTER = """<footer class="footer">
         <p>India's precision firearms manufacturer &mdash; engineering sidearms for marksmen, sport shooters and licensed professionals since 1997.</p>
       </div>
       <div>
-        <h5>Arsenal</h5>
-        <ul class="footer-list">
+        <h5>Arsenal &middot; All 13</h5>
+        <ul class="footer-list cols">
           <li><a href="../star-m45-ace-lite/index.html">Star M45 ACE Lite</a></li>
-          <li><a href="../star-tt30/index.html">Star TT 30</a></li>
-          <li><a href="../star-m32/index.html">Star M32</a></li>
           <li><a href="../baaz-30/index.html">BAAZ 30</a></li>
           <li><a href="../star-king-1911/index.html">Star King 1911</a></li>
+          <li><a href="../star-ss-1911/index.html">Star SS 1911</a></li>
+          <li><a href="../star-tt30/index.html">Star TT 30</a></li>
+          <li><a href="../star-m30/index.html">Star M30 Classic</a></li>
+          <li><a href="../star-super-30/index.html">Star Super 30</a></li>
+          <li><a href="../star-bolt-30/index.html">Star Bolt 30</a></li>
+          <li><a href="../star-30-original/index.html">Star 30 Original</a></li>
+          <li><a href="../star-m32/index.html">Star M32</a></li>
+          <li><a href="../star-x32/index.html">Star X32</a></li>
+          <li><a href="../star-max-32/index.html">Star Max 32</a></li>
+          <li><a href="../star-fx-100/index.html">Star FX-100</a></li>
           <li><a href="../products.html">View All &rarr;</a></li>
         </ul>
       </div>
@@ -599,10 +613,10 @@ FOOTER = """<footer class="footer">
       <div>
         <h5>Contact</h5>
         <address>
-          <div class="row"><strong>Phone</strong>+91 9793 849 997</div>
-          <div class="row"><strong>Email</strong>info@camstardefence.com</div>
-          <div class="row"><strong>Address</strong>Camstar Defence Industries<br/>Kanpur, Uttar Pradesh<br/>India &mdash; 208 001</div>
-          <div class="row"><strong>Hours</strong>Mon&ndash;Sat &middot; 11:00 &ndash; 19:00 IST</div>
+          <div class="row"><strong>Phone</strong><a href="tel:+919793849997">+91 9793 849 997</a></div>
+          <div class="row"><strong>Email</strong><a href="mailto:info@camstardefence.com">info@camstardefence.com</a></div>
+          <div class="row"><strong>Address</strong><span>Camstar Defence Industries<br/>Kanpur, Uttar Pradesh<br/>India &mdash; 208 001</span></div>
+          <div class="row"><strong>Hours</strong><span>Mon&ndash;Sat &middot; 11:00 &ndash; 19:00 IST</span></div>
         </address>
       </div>
     </div>
@@ -618,7 +632,10 @@ FOOTER = """<footer class="footer">
 </footer>
 """
 
-SCRIPTS = """<script>
+SCRIPTS = """<button class="btt" id="bttBtn" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script>
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 if (navToggle) {
@@ -627,41 +644,57 @@ if (navToggle) {
   });
 }
 
+// Nav condense on scroll
+const siteNav = document.getElementById('siteNav');
+if (siteNav) {
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+}
+
 // Scroll reveal
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .stagger').forEach(el => revealObs.observe(el));
 
 // Scroll progress bar
 const bar = document.createElement('div');
-bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#d11e3a,#ff6060);z-index:9999;box-shadow:0 0 8px rgba(209,30,58,0.8);pointer-events:none;transition:width 0.1s linear';
+bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#c41e2b,#ff6060);z-index:9999;box-shadow:0 0 8px rgba(196,30,43,0.7);pointer-events:none;transition:width 0.1s linear';
 document.body.appendChild(bar);
 window.addEventListener('scroll', () => {
   const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
   bar.style.width = pct + '%';
-});
+}, { passive: true });
 
-// Cursor glow
-const cursor = document.createElement('div');
-cursor.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(209,30,58,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:opacity 0.3s';
-document.body.appendChild(cursor);
-let gx = 0, gy = 0, gcx = 0, gcy = 0;
-document.addEventListener('mousemove', e => { gx = e.clientX; gy = e.clientY; });
-(function gc() { gcx += (gx-gcx)*0.08; gcy += (gy-gcy)*0.08; cursor.style.left=gcx+'px'; cursor.style.top=gcy+'px'; requestAnimationFrame(gc); })();
+// Back to top
+const btt = document.getElementById('bttBtn');
+if (btt) {
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('show', window.scrollY > 500);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
 
 // Button hover glow
 document.querySelectorAll('.btn-primary, .nav-cta, .cta-form button').forEach(btn => {
-  btn.addEventListener('mouseenter', () => btn.style.boxShadow = '0 0 28px rgba(209,30,58,0.45)');
+  btn.addEventListener('mouseenter', () => btn.style.boxShadow = '0 0 28px rgba(196,30,43,0.45)');
   btn.addEventListener('mouseleave', () => btn.style.boxShadow = '');
 });
 
-// Thumb click swap main image
-document.querySelectorAll('.gallery-thumbs .thumb').forEach(t => {
+// Thumb click swap main image (with active state + fade)
+const thumbs = document.querySelectorAll('.gallery-thumbs .thumb');
+if (thumbs.length) thumbs[0].classList.add('active');
+thumbs.forEach(t => {
   t.addEventListener('click', () => {
     const main = document.querySelector('.gallery-main img');
     const src = t.querySelector('img').src;
-    if (main && src) main.src = src;
+    if (main && src) {
+      thumbs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      main.style.opacity = '0';
+      setTimeout(() => { main.src = src; main.style.opacity = '1'; }, 160);
+    }
   });
 });
 </script>
